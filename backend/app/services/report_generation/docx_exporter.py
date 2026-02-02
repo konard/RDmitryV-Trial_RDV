@@ -1,11 +1,10 @@
 """DOCX report exporter."""
 
-from typing import Dict, Any, List, Optional
-from pathlib import Path
+from typing import Dict, Any, List
 import io
 
 from docx import Document
-from docx.shared import Pt, Cm, RGBColor, Inches
+from docx.shared import Pt, Cm, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from docx.enum.style import WD_STYLE_TYPE
 from docx.oxml.ns import qn
@@ -250,7 +249,7 @@ class DOCXExporter:
     def _add_introduction(self, data: Dict[str, Any]) -> None:
         """Add introduction section."""
         # Heading
-        p = self.document.add_paragraph("ВВЕДЕНИЕ", style='GOST Heading 0')
+        self.document.add_paragraph("ВВЕДЕНИЕ", style='GOST Heading 0')
 
         # Content
         text = data.get("text", "")
@@ -266,7 +265,7 @@ class DOCXExporter:
 
             # Section heading
             title = f"{i} {section.get('title', '').upper()}"
-            p = self.document.add_paragraph(title, style='GOST Heading 1')
+            self.document.add_paragraph(title, style='GOST Heading 1')
 
             # Section content
             content = section.get("content", "")
@@ -277,7 +276,7 @@ class DOCXExporter:
             for j, subsection in enumerate(section.get("subsections", []), 1):
                 # Subsection heading
                 subtitle = f"{i}.{j} {subsection.get('title', '')}"
-                p = self.document.add_paragraph(subtitle, style='GOST Heading 2')
+                self.document.add_paragraph(subtitle, style='GOST Heading 2')
 
                 # Subsection content
                 subcontent = subsection.get("content", "")
@@ -351,7 +350,7 @@ class DOCXExporter:
     def _add_conclusion(self, data: Dict[str, Any]) -> None:
         """Add conclusion section."""
         # Heading
-        p = self.document.add_paragraph("ЗАКЛЮЧЕНИЕ", style='GOST Heading 0')
+        self.document.add_paragraph("ЗАКЛЮЧЕНИЕ", style='GOST Heading 0')
 
         # Content
         text = data.get("text", "")

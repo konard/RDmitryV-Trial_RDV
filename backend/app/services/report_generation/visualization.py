@@ -1,13 +1,11 @@
 """Data visualization service for reports."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, List, Optional
 import io
-import base64
 import matplotlib.pyplot as plt
 import matplotlib
 import seaborn as sns
 import pandas as pd
-import numpy as np
 from matplotlib.figure import Figure
 
 # Use non-interactive backend

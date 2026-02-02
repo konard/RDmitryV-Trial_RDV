@@ -1,14 +1,12 @@
 """Fact-checking service for verifying claims and citations."""
 
-from typing import List, Dict, Optional, Tuple
-from datetime import datetime
+from typing import List, Dict
 import re
 import httpx
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from app.models.collected_data import CollectedData
-from app.models.data_source import DataSource
 from app.models.source_verification import SourceVerification, TrustedSource
 
 
@@ -240,7 +238,7 @@ class FactChecker:
         # Get trusted sources for the category
         stmt = select(TrustedSource).where(
             TrustedSource.category == category,
-            TrustedSource.is_official == True,
+            TrustedSource.is_official,
         )
         result = await self.db.execute(stmt)
         official_sources = list(result.scalars().all())

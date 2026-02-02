@@ -1,6 +1,6 @@
 """Report content generation service."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from datetime import datetime
 from sqlalchemy.orm import Session
 
@@ -180,11 +180,11 @@ class ContentGenerator:
         Returns:
             Dictionary with regional analysis data
         """
-        # Filter regional analysis results
-        regional_results = [
-            r for r in analysis_results
-            if r.analysis_type == "regional"
-        ]
+        # Filter regional analysis results (for future use)
+        # regional_results = [
+        #     r for r in analysis_results
+        #     if r.analysis_type == "regional"
+        # ]
 
         prompt = f"""
 Создай региональный анализ на основе данных:
@@ -278,11 +278,11 @@ class ContentGenerator:
         Returns:
             Dictionary with trend analysis data
         """
-        # Filter trend analysis results
-        trend_results = [
-            r for r in analysis_results
-            if r.analysis_type == "trend"
-        ]
+        # Filter trend analysis results (for future use)
+        # trend_results = [
+        #     r for r in analysis_results
+        #     if r.analysis_type == "trend"
+        # ]
 
         prompt = f"""
 Создай анализ трендов на основе данных:

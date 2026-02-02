@@ -1,6 +1,6 @@
 """Source reliability assessment service."""
 
-from typing import Optional, Dict, List
+from typing import Optional, List
 from datetime import datetime
 from urllib.parse import urlparse
 from sqlalchemy.ext.asyncio import AsyncSession

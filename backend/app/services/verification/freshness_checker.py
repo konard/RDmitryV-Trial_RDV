@@ -1,7 +1,7 @@
 """Data freshness checking service."""
 
 from typing import Optional, Dict
-from datetime import datetime, timedelta
+from datetime import datetime
 from dateutil import parser as date_parser
 import re
 from sqlalchemy.ext.asyncio import AsyncSession

@@ -1,6 +1,6 @@
 """Main report generator orchestrator."""
 
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from pathlib import Path
 from datetime import datetime
 import logging

@@ -1,8 +1,7 @@
 """PDF report exporter using ReportLab."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 import io
-from datetime import datetime
 
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm, mm
@@ -10,12 +9,11 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, PageBreak,
-    Table, TableStyle, Image, KeepTogether
+    Table, TableStyle, Image
 )
 from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus.tableofcontents import TableOfContents
 
 from .gost_formatter import GOSTFormatter
 
@@ -38,7 +36,7 @@ class PDFExporter:
         try:
             pdfmetrics.registerFont(TTFont('TimesNewRoman', 'times.ttf'))
             self.font_name = 'TimesNewRoman'
-        except:
+        except Exception:
             # Use default font if Times New Roman is not available
             self.font_name = 'Times-Roman'
 

@@ -12,11 +12,6 @@ from app.models.data_source import DataSource
 from app.models.collected_data import CollectedData
 from app.models.source_verification import (
     SourceVerification,
-    TrustedSource,
-    BlockedSource,
-    DataValidation,
-    VerificationStatus,
-    ReliabilityRating,
 )
 from app.services.verification import VerificationService
 
