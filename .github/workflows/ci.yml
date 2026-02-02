@@ -77,7 +77,7 @@ jobs:
           cd backend
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Run unit and integration tests
         env:
           DATABASE_URL: postgresql://test_user:test_password@localhost:5432/test_db
           REDIS_URL: redis://localhost:6379
@@ -85,8 +85,60 @@ jobs:
           OPENAI_API_KEY: test-key
         run: |
           cd backend
-          pytest tests/ -v --cov=app --cov-report=term-missing
+          pytest tests/ -v --cov=app --cov-report=term-missing --cov-report=xml --cov-report=html
+
+      - name: Run security tests
+        run: |
+          cd backend
+          pip install bandit safety
+          bandit -r app/ -f json -o bandit-report.json || true
+          safety check --json || true
         continue-on-error: true
+
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-coverage
+          path: |
+            backend/htmlcov/
+            backend/coverage.xml
+        if: always()
+
+  frontend-test:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Run unit tests
+        run: |
+          cd frontend
+          npm run test:coverage
+
+      - name: Upload frontend coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: frontend/coverage/
+        if: always()
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
 
   build:
     name: Build Docker Image
