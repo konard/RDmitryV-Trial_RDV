@@ -9,7 +9,7 @@
 │                         Frontend Layer                           │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
 │  │ Web Interface│  │ Admin Panel  │  │  API Documentation   │  │
-│  │   (React)    │  │   (React)    │  │    (Swagger UI)      │  │
+│  │   (Vue 3)    │  │   (Vue 3)    │  │    (Swagger UI)      │  │
 │  └──────────────┘  └──────────────┘  └──────────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
                               ↓ HTTP/REST
@@ -87,9 +87,9 @@
 ### 2.1 Frontend Layer (Слой представления)
 
 #### Web Interface (Пользовательский интерфейс)
-- **Технология**: React 18+ с TypeScript
-- **State Management**: Redux Toolkit / Zustand
-- **UI Library**: Tailwind CSS + shadcn/ui
+- **Технология**: Vue 3 с TypeScript (Composition API)
+- **State Management**: Pinia
+- **UI Library**: PrimeVue + PrimeFlex
 - **Функционал**:
   - Форма создания нового исследования
   - Дашборд с проектами исследований
@@ -97,7 +97,7 @@
   - Редактирование параметров исследования
 
 #### Admin Panel (Административная панель)
-- **Технология**: React 18+ с TypeScript
+- **Технология**: Vue 3 с TypeScript (Composition API)
 - **Функционал**:
   - Управление пользователями
   - Мониторинг системы
@@ -557,11 +557,11 @@ FastAPI (Producer) → Redis (Broker) → Celery Worker (Consumer)
 - **Visualization**: Matplotlib, Plotly
 
 ### Frontend
-- **Framework**: React 18+ with TypeScript
-- **State Management**: Redux Toolkit / Zustand
-- **UI Library**: Tailwind CSS, shadcn/ui
+- **Framework**: Vue 3 with TypeScript (Composition API)
+- **State Management**: Pinia
+- **UI Library**: PrimeVue, PrimeFlex
 - **HTTP Client**: Axios
-- **Charts**: Recharts / Chart.js
+- **Charts**: PrimeVue Chart / Chart.js
 
 ### Database & Storage
 - **RDBMS**: PostgreSQL 15+

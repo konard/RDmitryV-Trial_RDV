@@ -136,9 +136,9 @@
 - python-docx, ReportLab
 
 **Frontend Stack**:
-- React 18+ / TypeScript
-- Redux Toolkit / TanStack Query
-- Tailwind CSS / shadcn/ui
+- Vue 3.4+ / TypeScript (Composition API)
+- Pinia / TanStack Query (Vue Query)
+- PrimeVue / PrimeFlex
 - Vite / Vitest
 
 **DevOps Stack**:

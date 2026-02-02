@@ -81,9 +81,10 @@
   - Matplotlib/Plotly для визуализации
 
 - **Frontend**:
-  - React.js
+  - Vue.js 3 (Composition API)
   - TypeScript
-  - Tailwind CSS
+  - PrimeVue (UI компоненты)
+  - Pinia (управление состоянием)
 
 - **Database**:
   - PostgreSQL (основная БД)

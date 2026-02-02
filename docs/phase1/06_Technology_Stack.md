@@ -117,55 +117,62 @@
 ## 2. Frontend
 
 ### 2.1 Core
-- **React 18+**: UI библиотека
-  - Concurrent features
-  - Automatic batching
-  - Hooks
+- **Vue 3.4+**: Прогрессивный JavaScript фреймворк
+  - Composition API
+  - Reactivity System
+  - TypeScript support
+  - Performance optimizations
 - **TypeScript 5.3+**: Type safety
   - Static typing
   - Better IDE support
   - Refactoring safety
 
 ### 2.2 State Management
-- **Redux Toolkit 2.0+** или **Zustand 4.4+**:
-  - Redux Toolkit: для сложных приложений
-  - Zustand: для простых случаев, меньше boilerplate
-- **TanStack Query (React Query) 5.17+**: Server state management
+- **Pinia 2.1+**: Официальное решение для управления состоянием Vue 3
+  - Intuitive API
+  - TypeScript support из коробки
+  - Devtools integration
+  - Модульная архитектура
+- **TanStack Query (Vue Query) 5.17+**: Server state management
   - Caching
   - Background updates
   - Optimistic updates
 
 ### 2.3 Routing
-- **React Router 6.21+**: Client-side routing
+- **Vue Router 4+**: Официальный роутер для Vue 3
   - Nested routes
   - Lazy loading
-  - Route guards
+  - Navigation guards
+  - TypeScript support
 
 ### 2.4 UI Components & Styling
-- **Tailwind CSS 3.4+**: Utility-first CSS framework
+- **PrimeVue 3.50+**: Полнофункциональная UI библиотека
+  - 90+ готовых компонентов
+  - Темизация (включая dark mode)
+  - Accessibility (WCAG)
   - Responsive design
-  - Dark mode support
-  - JIT compilation
-- **shadcn/ui**: Component library
-  - Radix UI primitives
-  - Customizable
-  - Accessible
-- **Headless UI**: Unstyled accessible components
-- **React Icons 5.0+**: Icon library
+  - PrimeIcons для иконок
+- **PrimeFlex**: Utility CSS библиотека (аналог Tailwind)
+  - Flexbox и Grid утилиты
+  - Responsive utilities
+  - Интеграция с PrimeVue
 
 ### 2.5 Forms & Validation
-- **React Hook Form 7.49+**: Form management
-  - Performance focused
-  - Minimal re-renders
-- **Zod 3.22+**: Schema validation
-  - TypeScript-first
+- **VeeValidate 4+**: Form validation для Vue
+  - Composition API support
+  - TypeScript support
+  - Integrация с Yup/Zod
+- **Yup 1.3+** или **Zod 3.22+**: Schema validation
+  - TypeScript-first (Zod)
   - Compose schemas
 
 ### 2.6 Data Visualization
-- **Recharts 2.10+**: React charting library
-  - Composable charts
-  - Responsive
-- **Chart.js 4.4+** с **react-chartjs-2**: Alternative charting
+- **PrimeVue Chart**: Обертка Chart.js для Vue
+  - Интеграция с PrimeVue темами
+  - Reactive charts
+- **Chart.js 4.4+**: Alternative charting
+  - Responsive charts
+  - Multiple chart types
 
 ### 2.7 HTTP Client
 - **Axios 1.6+**: HTTP client
@@ -174,14 +181,16 @@
   - Automatic JSON handling
 
 ### 2.8 Development Tools
-- **Vite 5.0+**: Build tool
+- **Vite 5.0+**: Build tool (официально рекомендуется для Vue 3)
   - Fast HMR
   - Optimized production builds
+  - Vue SFC support
   - Plugin ecosystem
-- **ESLint 8.56+**: Linting
+- **ESLint 8.56+** с **eslint-plugin-vue**: Linting
 - **Prettier 3.1+**: Code formatting
-- **Vitest 1.2+**: Unit testing
+- **Vitest 1.2+**: Unit testing (создан автором Vue)
 - **Playwright 1.41+**: E2E testing
+- **Vue DevTools**: Browser extension для отладки
 
 ## 3. DevOps & Infrastructure
 
@@ -360,28 +369,30 @@ prometheus-client==0.19.0
 ```json
 {
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.3",
-    "@reduxjs/toolkit": "^2.0.1",
-    "@tanstack/react-query": "^5.17.19",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "pinia": "^2.1.7",
+    "primevue": "^3.50.0",
+    "primeicons": "^7.0.0",
+    "primeflex": "^3.3.1",
+    "@tanstack/vue-query": "^5.17.19",
     "axios": "^1.6.5",
-    "zod": "^3.22.4",
-    "react-hook-form": "^7.49.3",
-    "recharts": "^2.10.4",
-    "react-icons": "^5.0.1"
+    "vee-validate": "^4.12.5",
+    "yup": "^1.3.3",
+    "chart.js": "^4.4.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/tsconfig": "^0.5.1",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
-    "tailwindcss": "^3.4.1",
+    "vue-tsc": "^1.8.27",
     "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^9.21.1",
     "prettier": "^3.1.1",
     "vitest": "^1.2.0",
-    "@playwright/test": "^1.41.0"
+    "@playwright/test": "^1.41.0",
+    "@vue/test-utils": "^2.4.4"
   }
 }
 ```
@@ -394,11 +405,20 @@ prometheus-client==0.19.0
 - **Data Science**: Pandas, NumPy для обработки данных
 - **Rapid Development**: Быстрая разработка и прототипирование
 
-### 8.2 Почему React/TypeScript для frontend?
-- **React**: Наиболее популярный UI фреймворк, большая экосистема
+### 8.2 Почему Vue 3/TypeScript для frontend?
+- **Vue 3**: Прогрессивный фреймворк с отличной производительностью
+  - Composition API для лучшей организации кода
+  - Встроенная реактивность
+  - Меньший размер бандла по сравнению с React
+  - Отличная документация на русском языке
+- **PrimeVue**: Полнофункциональная UI библиотека
+  - 90+ готовых компонентов enterprise-уровня
+  - Профессиональные темы из коробки
+  - Accessibility и i18n поддержка
+  - Регулярные обновления и поддержка
 - **TypeScript**: Type safety, лучший DX, меньше ошибок
 - **Component-based**: Переиспользование компонентов
-- **Strong Community**: Множество библиотек и ресурсов
+- **Strong Community**: Растущая экосистема и активное сообщество
 
 ### 8.3 Почему PostgreSQL?
 - **Reliability**: Проверенная СУБД с высокой надежностью
@@ -421,9 +441,10 @@ prometheus-client==0.19.0
 - **Node.js/NestJS**: Для JavaScript-only команд
 
 ### 9.2 Frontend Alternatives
-- **Vue.js**: Проще для новичков
-- **Svelte**: Меньший bundle size
-- **Next.js**: SSR/SSG из коробки
+- **React + Material-UI/Ant Design**: Более популярный, но больший bundle
+- **Angular**: Enterprise фреймворк, более тяжелый
+- **Svelte**: Меньший bundle size, но меньшая экосистема
+- **Nuxt.js (Vue)**: SSR/SSG из коробки, если понадобится
 
 ### 9.3 Database Alternatives
 - **MongoDB**: NoSQL, более гибкая схема
