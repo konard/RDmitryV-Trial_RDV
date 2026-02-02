@@ -50,3 +50,6 @@ class Research(Base):
     # Relationships
     user = relationship("User", back_populates="researches")
     reports = relationship("Report", back_populates="research", cascade="all, delete-orphan")
+    collected_data = relationship("CollectedData", back_populates="research", cascade="all, delete-orphan")
+    analysis_results = relationship("AnalysisResult", back_populates="research", cascade="all, delete-orphan")
+    competitors = relationship("Competitor", back_populates="research", cascade="all, delete-orphan")
