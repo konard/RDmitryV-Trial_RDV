@@ -10,7 +10,8 @@ from app.core.database import Base, get_db
 from app.core.config import settings
 
 # Test database URL
-TEST_DATABASE_URL = str(settings.database_url).replace("postgresql://", "postgresql+asyncpg://") + "_test"
+# In CI, DATABASE_URL already points to test_db, so we don't append _test
+TEST_DATABASE_URL = str(settings.database_url).replace("postgresql://", "postgresql+asyncpg://")
 
 engine = create_async_engine(TEST_DATABASE_URL, echo=False)
 TestingSessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
