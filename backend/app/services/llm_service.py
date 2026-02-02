@@ -1,6 +1,5 @@
 """LLM Service for market analysis."""
 
-from typing import Optional
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from langchain.prompts import ChatPromptTemplate

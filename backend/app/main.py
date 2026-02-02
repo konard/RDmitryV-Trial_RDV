@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from app.core.config import settings
-from app.api.v1 import auth, research
+from app.api.v1 import auth, research, analysis
 
 
 @asynccontextmanager
@@ -40,6 +40,7 @@ app.add_middleware(
 # Include routers
 app.include_router(auth.router, prefix=f"{settings.api_v1_prefix}/auth", tags=["Authentication"])
 app.include_router(research.router, prefix=f"{settings.api_v1_prefix}/research", tags=["Research"])
+app.include_router(analysis.router, prefix=f"{settings.api_v1_prefix}/analysis", tags=["Analysis"])
 
 
 @app.get("/")
