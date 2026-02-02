@@ -40,4 +40,29 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    // Enable code splitting
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Vendor chunks
+          'vendor-vue': ['vue', 'vue-router', 'pinia'],
+          'vendor-ui': ['primevue', 'primeicons', 'primeflex'],
+          'vendor-charts': ['chart.js'],
+          'vendor-validation': ['vee-validate', 'yup'],
+          'vendor-http': ['axios'],
+        },
+      },
+    },
+    // Optimize chunk size
+    chunkSizeWarningLimit: 1000,
+    // Enable CSS code splitting
+    cssCodeSplit: true,
+    // Enable source maps for production debugging
+    sourcemap: process.env.NODE_ENV !== 'production',
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['vue', 'vue-router', 'pinia', 'axios'],
+  },
 })

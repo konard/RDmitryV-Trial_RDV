@@ -1,6 +1,7 @@
 """Pytest configuration and fixtures."""
 
 import pytest
+import pytest_asyncio
 from typing import AsyncGenerator
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
@@ -9,7 +10,8 @@ from app.core.database import Base, get_db
 from app.core.config import settings
 
 # Test database URL
-TEST_DATABASE_URL = str(settings.database_url).replace("postgresql://", "postgresql+asyncpg://") + "_test"
+# In CI, DATABASE_URL already points to test_db, so we don't append _test
+TEST_DATABASE_URL = str(settings.database_url).replace("postgresql://", "postgresql+asyncpg://")
 
 engine = create_async_engine(TEST_DATABASE_URL, echo=False)
 TestingSessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
@@ -28,7 +30,7 @@ async def override_get_db() -> AsyncGenerator[AsyncSession, None]:
             await session.close()
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def db_session() -> AsyncGenerator[AsyncSession, None]:
     """Create a test database session."""
     async with engine.begin() as conn:
@@ -41,7 +43,7 @@ async def db_session() -> AsyncGenerator[AsyncSession, None]:
         await conn.run_sync(Base.metadata.drop_all)
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def client() -> AsyncGenerator[AsyncClient, None]:
     """Create a test client."""
     app.dependency_overrides[get_db] = override_get_db
