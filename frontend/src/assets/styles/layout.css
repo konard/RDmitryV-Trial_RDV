@@ -131,7 +131,26 @@
     color: var(--text-color-secondary);
     font-weight: 700;
     font-size: 0.857rem;
-    margin: 1.5rem 0.5rem 0.5rem 0.5rem;
+    margin: 1.5rem 0.5rem 0.75rem 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s;
+}
+
+.layout-menuitem-root-text:hover {
+    background-color: var(--surface-hover);
+}
+
+.layout-menuitem-root-text .layout-submenu-toggler {
+    transition: transform 0.2s;
+}
+
+.layout-root-menuitem.menu-collapsed .layout-menuitem-root-text .layout-submenu-toggler {
+    transform: rotate(-90deg);
 }
 
 .layout-menuitem-text {
@@ -139,11 +158,71 @@
     transition: all 0.2s;
 }
 
+/* Submenu styles */
+.layout-submenu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.layout-submenu > li {
+    margin: 0.25rem 0;
+}
+
+.layout-submenu > li > a,
+.layout-submenu > li > .router-link-active {
+    display: flex;
+    align-items: center;
+    padding: 0.85rem 1rem;
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.2s;
+    line-height: 1.5;
+}
+
+.layout-submenu > li > a:hover,
+.layout-submenu > li > .router-link-active:hover {
+    background-color: var(--surface-hover);
+}
+
+.layout-submenu > li > a.active-route,
+.layout-submenu > li > .router-link-active.active-route {
+    background-color: var(--primary-color);
+    color: var(--primary-color-text);
+}
+
+.layout-submenu > li > a.active-route .layout-menuitem-icon,
+.layout-submenu > li > .router-link-active.active-route .layout-menuitem-icon {
+    color: var(--primary-color-text);
+}
+
+.layout-menuitem-icon {
+    margin-right: 0.75rem;
+    color: var(--text-color-secondary);
+    font-size: 1.1rem;
+}
+
+/* Submenu collapse transition */
+.layout-submenu-enter-active,
+.layout-submenu-leave-active {
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    max-height: 500px;
+    opacity: 1;
+}
+
+.layout-submenu-enter-from,
+.layout-submenu-leave-to {
+    max-height: 0;
+    opacity: 0;
+}
+
 .layout-menuitem-root > .layout-menuitem-content {
     border-radius: var(--border-radius);
     color: var(--text-color);
     transition: all 0.2s;
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1rem;
 }
 
 .layout-menuitem-root > .layout-menuitem-content:hover {
@@ -151,7 +230,7 @@
 }
 
 .layout-menuitem-root > .layout-menuitem-content .layout-menuitem-icon {
-    margin-right: 0.5rem;
+    margin-right: 0.75rem;
     color: var(--text-color-secondary);
 }
 

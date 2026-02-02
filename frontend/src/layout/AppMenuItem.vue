@@ -1,6 +1,6 @@
 <script setup>
 import { useLayout } from '@/layout/composables/layout';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const { layoutState, isDesktop } = useLayout();
 
@@ -16,14 +16,26 @@ const props = defineProps({
     parentPath: {
         type: String,
         default: null
+    },
+    index: {
+        type: Number,
+        default: 0
     }
 });
+
+// Track if menu group is collapsed (expanded by default)
+const isCollapsed = ref(false);
 
 const fullPath = computed(() => (props.item.path ? (props.parentPath ? props.parentPath + props.item.path : props.item.path) : null));
 
 const isActive = computed(() => {
     return props.item.path ? layoutState.activePath?.startsWith(fullPath.value) : layoutState.activePath === props.item.to;
 });
+
+// Toggle collapse for root menu groups
+const toggleCollapse = () => {
+    isCollapsed.value = !isCollapsed.value;
+};
 
 const itemClick = (event, item) => {
     if (item.disabled) {
@@ -57,9 +69,12 @@ const onMouseEnter = () => {
 </script>
 
 <template>
-    <li :class="{ 'layout-root-menuitem': root, 'active-menuitem': isActive }">
-        <div v-if="root && item.visible !== false" class="layout-menuitem-root-text">{{ item.label }}</div>
-        <a v-if="(!item.to || item.items) && item.visible !== false" :href="item.url" @click="itemClick($event, item)" :class="item.class" :target="item.target" tabindex="0" @mouseenter="onMouseEnter">
+    <li :class="{ 'layout-root-menuitem': root, 'active-menuitem': isActive, 'menu-collapsed': isCollapsed }">
+        <div v-if="root && item.visible !== false" class="layout-menuitem-root-text" @click="toggleCollapse">
+            <span>{{ item.label }}</span>
+            <i class="pi pi-fw pi-angle-down layout-submenu-toggler" v-if="item.items" />
+        </div>
+        <a v-if="(!item.to || item.items) && item.visible !== false && !root" :href="item.url" @click="itemClick($event, item)" :class="item.class" :target="item.target" tabindex="0" @mouseenter="onMouseEnter">
             <i :class="item.icon" class="layout-menuitem-icon" />
             <span class="layout-menuitem-text">{{ item.label }}</span>
             <i class="pi pi-fw pi-angle-down layout-submenu-toggler" v-if="item.items" />
@@ -70,7 +85,7 @@ const onMouseEnter = () => {
             <i class="pi pi-fw pi-angle-down layout-submenu-toggler" v-if="item.items" />
         </router-link>
         <Transition v-if="item.items && item.visible !== false" name="layout-submenu">
-            <ul v-show="root ? true : isActive" class="layout-submenu">
+            <ul v-show="root ? !isCollapsed : isActive" class="layout-submenu">
                 <app-menu-item v-for="child in item.items" :key="child.label + '_' + (child.to || child.path)" :item="child" :root="false" :parentPath="fullPath" />
             </ul>
         </Transition>

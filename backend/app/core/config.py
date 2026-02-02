@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     algorithm: str = "HS256"
 
     # Database
-    database_url: PostgresDsn = Field(..., validation_alias="DATABASE_URL")
+    database_url: str = Field(..., validation_alias="DATABASE_URL")
 
     # Redis
     redis_url: str = Field(default="redis://localhost:6379", validation_alias="REDIS_URL")
